@@ -1,6 +1,6 @@
 # RailsEnvPrompt
 
-Adds current Rails env and Apartment tenant to prompt.
+Adds current Rails application nane, env (with color) and Apartment tenant to prompt.
 
 Before:
 
@@ -11,7 +11,7 @@ Before:
 After:
 
 ```
-development/tenant-123 001:0>
+MyApp/development/tenant-123 001:0>
 ```
 
 The current tenant is only included if Apartment is available

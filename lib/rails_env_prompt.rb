@@ -5,22 +5,20 @@ require 'rails_env_prompt/version'
 module RailsEnvPrompt
   def self.template
     [
-      env_prompt,
+      '[APP]',
+      '[ENV]',
       tenant_prompt
     ].compact.join('/')
   end
 
   def self.parse(string)
-    string.gsub('[ENV]', colored(Rails.env, environment_color))
+    string.gsub('[APP]', Rails.application.class.parent_name)
+          .gsub('[ENV]', colored(Rails.env, environment_color))
           .gsub('[TENANT]', defined?(Apartment) ? Apartment::Tenant.current : '')
   end
 
   def self.to_s
     parse(template)
-  end
-
-  def self.env_prompt
-    '[ENV]'
   end
 
   def self.tenant_prompt
