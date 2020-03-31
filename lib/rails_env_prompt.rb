@@ -12,7 +12,7 @@ module RailsEnvPrompt
   end
 
   def self.parse(string)
-    string.gsub('[APP]', Rails.application.class.parent_name)
+    string.gsub('[APP]', Rails.application.class.module_parent_name)
           .gsub('[ENV]', colored(Rails.env, environment_color))
           .gsub('[TENANT]', defined?(Apartment) ? Apartment::Tenant.current : '')
   end
