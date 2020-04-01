@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails_env_prompt (0.2.0)
+    rails_env_prompt (1.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -11,6 +11,7 @@ GEM
 PLATFORMS
   ruby
   universal-darwin-18
+  x86_64-darwin-19
 
 DEPENDENCIES
   bundler (~> 1.16)
@@ -18,4 +19,4 @@ DEPENDENCIES
   rake (~> 13.0)
 
 BUNDLED WITH
-   1.16.3
+   1.17.3
