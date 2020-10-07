@@ -2,9 +2,7 @@ require 'irb'
 
 module IRB
   class << self
-    def setup_with_prompt_override(ap_path)
-      setup_without_prompt_override(ap_path)
-
+    def _patch
       prompt = RailsEnvPrompt.template
 
       prompts = {
@@ -34,7 +32,18 @@ module IRB
       IRB.conf[:PROMPT_MODE] = :RAILS_ENV_PROMPT
     end
 
-    alias setup_without_prompt_override setup
-    alias setup setup_with_prompt_override
+    _setup = instance_method(:setup)
+
+    if _setup.arity == -2
+      define_method(:setup) do |ap_path, argv: ::ARGV|
+        _setup.bind(self).call(ap_path, argv: argv)
+        _patch
+      end
+    else
+      define_method(:setup) do |ap_path|
+        _setup.bind(self).call(ap_path)
+        _patch
+      end
+    end
   end
 end
