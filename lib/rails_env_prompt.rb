@@ -5,12 +5,14 @@ require 'rails_env_prompt/version'
 module RailsEnvPrompt
   def self.app_name
     @app_name ||= begin
-                    # Rails 6 deprecates :parent_name
-                    method = Rails.application.class.method_defined?(:module_parent_name) &&
-                      :module_parent_name ||
-                      :parent_name
-                    Rails.application.class.public_send(method)
-                  end
+      application_class = Rails.application.class
+
+      case
+      when application_class.method_defined?(:module_parent_name) then application_class.module_parent_name
+      when application_class.method_defined?(:parent_name) then application_class.parent_name
+      else application_class.name =~ /::[^:]+\z/ ? -$` : nil
+      end
+    end
   end
 
   def self.template
