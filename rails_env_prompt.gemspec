@@ -7,6 +7,7 @@ Gem::Specification.new do |spec|
   spec.version       = RailsEnvPrompt::VERSION
   spec.authors       = ['Rene van Lieshout']
   spec.email         = ['rene@lico.nl']
+  spec.licenses      = ['MIT']
 
   spec.summary       = 'Adds current Rails env and Apartment tenant to prompt'
   spec.description   = 'Adds current Rails env and Apartment tenant to prompt'
