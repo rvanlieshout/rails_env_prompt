@@ -3,6 +3,14 @@ require 'rails_env_prompt/pry'
 require 'rails_env_prompt/version'
 
 module RailsEnvPrompt
+  def self.template
+    [
+      app_name,
+      environment_name,
+      tenant_prompt
+    ].compact.join('/') + ' '
+  end
+
   def self.app_name
     @app_name ||= begin
       application_class = Rails.application.class
@@ -15,28 +23,14 @@ module RailsEnvPrompt
     end
   end
 
-  def self.template
-    [
-      '[APP]',
-      '[ENV]',
-      tenant_prompt
-    ].compact.join('/')
-  end
-
-  def self.parse(string)
-    string.gsub('[APP]', app_name)
-          .gsub('[ENV]', colored(Rails.env, environment_color))
-          .gsub('[TENANT]', defined?(Apartment) ? Apartment::Tenant.current : '')
-  end
-
-  def self.to_s
-    parse(template)
+  def self.environment_name
+    colored(Rails.env, environment_color)
   end
 
   def self.tenant_prompt
     return unless defined?(Apartment)
 
-    '[TENANT]'
+    Apartment::Tenant.current
   end
 
   def self.colored(text, color)
