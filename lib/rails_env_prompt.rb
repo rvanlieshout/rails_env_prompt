@@ -1,5 +1,3 @@
-require 'rails_env_prompt/irb'
-require 'rails_env_prompt/pry'
 require 'rails_env_prompt/version'
 
 module RailsEnvPrompt
@@ -51,3 +49,8 @@ module RailsEnvPrompt
     end
   end
 end
+
+# Load patches
+require 'rails_env_prompt/irb-pre-190'
+require 'rails_env_prompt/irb-190'
+require 'rails_env_prompt/pry'
