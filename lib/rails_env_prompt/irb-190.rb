@@ -1,6 +1,6 @@
 require 'irb'
 
-if IRB::VERSION >= Gem::Version.new('1.9.0')
+if Gem::Version.new(IRB::VERSION) >= Gem::Version.new('1.9.0')
   module IRB
     class Irb
       original_format_prompt = instance_method(:format_prompt)

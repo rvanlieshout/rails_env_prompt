@@ -1,6 +1,6 @@
 require 'irb'
 
-if IRB::VERSION < Gem::Version.new('1.9.0')
+if Gem::Version.new(IRB::VERSION) < Gem::Version.new('1.9.0')
   module IRB
     class << self
       def _patch
