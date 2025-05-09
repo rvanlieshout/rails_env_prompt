@@ -4,7 +4,9 @@ rescue LoadError => _e
 end
 
 if defined?(Pry)
-  Pry.config.prompt = proc do |obj, nest_level, _|
-    "#{RailsEnvPrompt.to_s} #{obj}:#{nest_level}> "
+  Pry::Prompt.add(:rails_env_prompt) do |context, nesting, _instance, sep|
+    "#{RailsEnvPrompt} #{context}:#{nesting}#{sep}"
   end
+
+  Pry.config.prompt = Pry::Prompt[:rails_env_prompt]
 end
